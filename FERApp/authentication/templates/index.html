@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>FERApp</title>
- 
-  <link rel="stylesheet" src="css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>FERApp</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 
 <body>
@@ -71,7 +71,7 @@
           </div>
           
           <div class="field-wrap">
-            <button class="button button-block">Log In</button>
+            <button class="button button-block">Continue</button>
           </div>
 
           </form>
@@ -82,7 +82,7 @@
       
 </div>
   
-    <script type="application/json" src="js/index.js"></script>
+    <script type="text/javascript" src="{% static 'index.js' %}"></script>
 
 </body>
 </html>
