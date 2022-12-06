@@ -1,6 +1,5 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 
 
 def index(request):
-    return HttpResponse('Main page')
+    return render(request, 'main.html', context={'login': 'ABCDE'})

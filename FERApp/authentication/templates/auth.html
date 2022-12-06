@@ -1,48 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>FERApp</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
-</head>
+{% extends "base_generic.html" %}
 
-<body>
-  <div class="form">
-      
+{% block links %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/styles.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="form">
+
       <ul class="tab-group">
         <li class="tab active"><a href="#signup">Sign Up</a></li>
         <li class="tab"><a href="#signin">Sign In</a></li>
       </ul>
-      
+
       <div class="tab-content">
         <div id="signup">
           <h1>Sign Up</h1>
-          
-          <form>
-          
+
+          <form action="/main">
+
           <div class="field-wrap">
             <label>
               Login<span class="req">*</span>
             </label>
             <input type="text" required autocomplete="off" />
           </div>
-      
+
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
             <input type="password" required autocomplete="off"/>
           </div>
-          
+
           <div class="field-wrap">
             <label>
               Confirm password<span class="req">*</span>
             </label>
             <input type="password" required autocomplete="off"/>
           </div>
-          
+
           <div class="field-wrap">
             <button type="submit" class="button button-block">Get Started</button>
           </div>
@@ -50,26 +47,26 @@
           </form>
 
         </div>
-        
-        <div id="signin">   
+
+        <div id="signin">
           <h1>Sign in</h1>
-          
-          <form>
-          
+
+          <form action="/main">
+
           <div class="field-wrap">
             <label>
               Login<span class="req">*</span>
             </label>
             <input type="text" required autocomplete="off"/>
           </div>
-          
+
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
             <input type="password" required autocomplete="off"/>
           </div>
-          
+
           <div class="field-wrap">
             <button class="button button-block">Continue</button>
           </div>
@@ -77,12 +74,10 @@
           </form>
 
         </div>
-        
-      </div>
-      
-</div>
-  
-    <script type="text/javascript" src="{% static 'index.js' %}"></script>
 
-</body>
-</html>
+      </div>
+
+</div>
+
+    <script type="text/javascript" src="{% static 'authentication/js/index.js' %}"></script>
+{% endblock %}

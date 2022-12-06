@@ -1,0 +1,52 @@
+{% extends "base_generic.html" %}
+
+{% block links %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="form">
+
+      <ul class="tab-group">
+        <li class="tab active"><a href="#profile">Profile</a></li>
+        <li class="tab"><a href="#recognize">Recognize</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="profile">
+          <h1>Profile</h1>
+
+          <form>
+
+          <div class="field-wrap">
+            <label>
+              Login: {{ login }}
+            </label>
+          </div>
+
+          </form>
+
+        </div>
+
+        <div id="recognize">
+          <h1>Recognize face expression</h1>
+
+          <form>
+
+          <div class="field-wrap">
+            <label>
+              Login: {{ login }}
+            </label>
+          </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+</div>
+
+    <script type="text/javascript" src="{% static 'main/js/index.js' %}"></script>
+{% endblock %}
