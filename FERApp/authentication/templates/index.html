@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>FERApp</title>
+ 
+  <link rel="stylesheet" src="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="form">
+      
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#signin">Sign In</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div id="signup">
+          <h1>Sign Up</h1>
+          
+          <form>
+          
+          <div class="field-wrap">
+            <label>
+              Login<span class="req">*</span>
+            </label>
+            <input type="text" required autocomplete="off" />
+          </div>
+      
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password" required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Confirm password<span class="req">*</span>
+            </label>
+            <input type="password" required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <button type="submit" class="button button-block">Get Started</button>
+          </div>
+
+          </form>
+
+        </div>
+        
+        <div id="signin">   
+          <h1>Sign in</h1>
+          
+          <form>
+          
+          <div class="field-wrap">
+            <label>
+              Login<span class="req">*</span>
+            </label>
+            <input type="text" required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password" required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <button class="button button-block">Log In</button>
+          </div>
+
+          </form>
+
+        </div>
+        
+      </div>
+      
+</div>
+  
+    <script type="application/json" src="js/index.js"></script>
+
+</body>
+</html>
