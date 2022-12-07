@@ -30,7 +30,10 @@ $('.form').find('input, textarea').on('keyup blur focus', function (e) {
 $('.tab a').on('click', function (e) {
   
   e.preventDefault();
-  
+
+  $('input').val('');
+  $('label').removeClass('active highlight');
+  $('#err_msg').html('');
   $(this).parent().addClass('active');
   $(this).parent().siblings().removeClass('active');
   
@@ -40,4 +43,18 @@ $('.tab a').on('click', function (e) {
   
   $(target).fadeIn(600);
   
+});
+
+$('#password, #confirm_password').on('keyup', function () {
+  $('#err_msg').addClass('highlight').css('left', '0')
+  if ($('#password').val() == '' && $('#confirm_password').val() == '') {
+    $('#reg_button').prop('disabled', false).css('opacity', '1');
+    $('#err_msg').html('');
+  } else if ($('#password').val() == $('#confirm_password').val()) {
+    $('#reg_button').prop('disabled', false).css('opacity', '1');
+    $('#err_msg').html('Passwords match');
+  } else {
+    $('#reg_button').prop('disabled', true).css('opacity', '.5');
+    $('#err_msg').html('Passwords does not match');
+  }
 });

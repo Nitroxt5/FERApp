@@ -17,7 +17,7 @@
         <div id="signup">
           <h1>Sign Up</h1>
 
-          <form action="/main">
+          <form method="post" action="{% url 'register' %}">
 
           <div class="field-wrap">
             <label>
@@ -30,18 +30,22 @@
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password" required autocomplete="off"/>
+            <input type="password" id="password" required autocomplete="off"/>
           </div>
 
           <div class="field-wrap">
             <label>
               Confirm password<span class="req">*</span>
             </label>
-            <input type="password" required autocomplete="off"/>
+            <input type="password" id="confirm_password" required autocomplete="off"/>
           </div>
 
           <div class="field-wrap">
-            <button type="submit" class="button button-block">Get Started</button>
+            <label id="err_msg"></label>
+          </div>
+
+          <div class="field-wrap">
+            <button type="submit" class="button button-block" id="reg_button">Get Started</button>
           </div>
 
           </form>
@@ -51,7 +55,7 @@
         <div id="signin">
           <h1>Sign in</h1>
 
-          <form action="/main">
+          <form method="post" action="{% url 'login' %}">
 
           <div class="field-wrap">
             <label>
