@@ -26,3 +26,10 @@ class RegForm(forms.Form):
         if cd['reg_password'] != cd['reg_confirm_password']:
             raise forms.ValidationError(_('Passwords do not match.'), code='pass_not_match')
         return cd['reg_confirm_password']
+
+
+class PassForm(forms.Form):
+    old_password = forms.CharField(min_length=8, max_length=20, widget=forms.PasswordInput,
+                                   validators=[_no_space_validator], error_messages={'required': _('Password field is required')})
+    new_password = forms.CharField(min_length=8, max_length=20, widget=forms.PasswordInput,
+                                   validators=[_no_space_validator], error_messages={'required': _('Password field is required')})

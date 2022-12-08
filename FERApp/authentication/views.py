@@ -1,11 +1,13 @@
 import logging
-from .forms import LogForm, RegForm
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
+
+from .forms import LogForm, RegForm, PassForm
 
 
 def index(request):
@@ -51,4 +53,19 @@ def register(request):
                                    'log_form': LogForm(), 'reg_form': RegForm()})
         user.save()
         login(request, user)
+    return redirect('main', permanent=True)
+
+
+def change_pass(request):
+    if request.method == 'POST':
+        form = PassForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username=request.user.username, password=request.POST['old_password'])
+            if user is not None:
+                user.set_password(request.POST['new_password'])
+                user.save()
+                login(request, user)
+                messages.success(request, _('Password successfully changed!'))
+                return redirect('main', permanent=True)
+        messages.error(request, _('Old password is wrong!'))
     return redirect('main', permanent=True)

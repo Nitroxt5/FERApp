@@ -8,52 +8,81 @@
 {% block body %}
 <div class="form">
 
-      <ul class="tab-group">
+    <ul class="tab-group">
         <li class="tab active"><a href="#profile">Profile</a></li>
         <li class="tab"><a href="#recognize">Recognize</a></li>
-      </ul>
+    </ul>
 
-      <div class="tab-content">
+    <div class="tab-content">
         <div id="profile">
-          <h1>Profile</h1>
+            <h1>Hello, {{ user.username }}!</h1>
 
-          <div class="field-wrap">
-            <label>
-              Hello, {{ user.username }}!
-            </label>
-          </div>
+            <ul class="tab-group">
+            <li class="profile_info"><form action="{% url 'change_pass' %}" method="post">
+                {% csrf_token %}
 
-          <div class="field-wrap">
-            <label>
-              You recognized {{ user.profile.uploads_count }} face expressions already!
-            </label>
-          </div>
+                <h1>Change password</h1>
+                <div class="field-wrap">
+                    <label>
+                        Old password<span class="req">*</span>
+                    </label>
+                    {{ form.old_password }}
+                </div>
 
-          <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
+                <div class="field-wrap">
+                    <label>
+                        New password<span class="req">*</span>
+                    </label>
+                    {{ form.new_password }}
+                </div>
+
+                <div class="field-wrap">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <label class="err_msg" id="change_err">{{ message }}</label>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="field-wrap">
+                    <button type="submit" class="button button-block" id="change_button">Change password</button>
+                </div>
+
+            </form></li>
+
+            <li class="profile_info"><form>
             <div class="field-wrap">
-              <button type="submit" class="button button-block" id="out_button">Log out</button>
-            </div>
-          </form>
+                <label id="info">
+                  You recognized {{ user.profile.uploads_count }} face expressions already!
+                </label>
+            </div></form></li>
+            </ul>
+
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <div class="field-wrap">
+                  <button type="submit" class="button button-block" id="out_button">Log out</button>
+              </div>
+            </form>
 
         </div>
 
         <div id="recognize">
-          <h1>Recognize face expression</h1>
+            <h1>Recognize face expression</h1>
 
-          <form>
+            <form>
 
-          <div class="field-wrap">
-            <label>
-              Hello, {{ user.username }}!
-            </label>
-          </div>
+            <div class="field-wrap">
+                <label>
+                    Hello, {{ user.username }}!
+                </label>
+            </div>
 
-          </form>
+            </form>
 
         </div>
 
-      </div>
+    </div>
 
 </div>
 

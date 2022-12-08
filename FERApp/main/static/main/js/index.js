@@ -31,6 +31,10 @@ $('.tab a').on('click', function (e) {
   
   target = $(this).attr('href');
 
+  if (target === '#recognize') {
+    $('#change_err').html('');
+  }
+
   $('.tab-content > div').not(target).hide();
   
   $(target).fadeIn(600);
