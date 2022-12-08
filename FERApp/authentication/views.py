@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.utils.translation import gettext as _
 
 
 def index(request):
@@ -23,7 +24,7 @@ def log_in(request):
                 login(request, user)
                 return redirect('main', permanent=True)
     return render(request, 'base_auth.html',
-                  context={'signup': False, 'log_err': 'Wrong username or password!',
+                  context={'signup': False, 'log_err': _('Wrong username or password!'),
                            'reg_err': '', 'log_form': LogForm(), 'reg_form': RegForm()})
 
 
@@ -38,14 +39,15 @@ def register(request):
     if request.method == 'POST':
         form = RegForm(request.POST)
         if not form.is_valid():
+            error_msg = next(filter(lambda el: el != [''], form.errors.values()), '')[0]
             return render(request, 'base_auth.html',
-                          context={'signup': True, 'log_err': '', 'reg_err': 'Username and password must not contain spaces!',
+                          context={'signup': True, 'log_err': '', 'reg_err': error_msg,
                                    'log_form': LogForm(), 'reg_form': RegForm()})
         try:
             user = User.objects.create_user(request.POST['reg_username'], '', request.POST['reg_password'])
         except IntegrityError:
             return render(request, 'base_auth.html',
-                          context={'signup': True, 'log_err': '', 'reg_err': 'Username already exists!',
+                          context={'signup': True, 'log_err': '', 'reg_err': _('Username already exists!'),
                                    'log_form': LogForm(), 'reg_form': RegForm()})
         user.save()
         login(request, user)
