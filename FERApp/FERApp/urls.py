@@ -21,7 +21,7 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('auth/', include('authentication.urls')),
     path('main/', include('main.urls')),
-    path('', RedirectView.as_view(url='/auth/', permanent=True)),
+    path('', RedirectView.as_view(url='/main/', permanent=True)),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

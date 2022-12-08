@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def index(request):
-    return render(request, 'main.html', context={'login': 'ABCDE'})
+    if not request.user.is_authenticated:
+        return redirect('auth', permanent=True)
+    return render(request, 'main.html')

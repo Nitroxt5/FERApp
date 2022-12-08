@@ -17,15 +17,13 @@
         <div id="profile">
           <h1>Profile</h1>
 
-          <form>
-
           <div class="field-wrap">
             <label>
-              Login: {{ login }}
+              Hello, {{ user.username }}!
             </label>
           </div>
 
-          </form>
+            <a href="{% url 'logout' %}">Log out</a>
 
         </div>
 
@@ -36,7 +34,7 @@
 
           <div class="field-wrap">
             <label>
-              Login: {{ login }}
+              Hello, {{ user.username }}!
             </label>
           </div>
 

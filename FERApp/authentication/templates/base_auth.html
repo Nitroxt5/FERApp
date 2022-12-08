@@ -1,0 +1,101 @@
+{% extends "base_generic.html" %}
+
+{% block links %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/styles.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="form">
+    <ul class="tab-group">
+        <li class="tab active"><a href="#signin">Sign In</a></li>
+        <li class="tab"><a href="#signup">Sign Up</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <div id="signin">
+
+            <h1>Sign In</h1>
+
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+
+                <div class="field-wrap">
+                    <label>
+                        Login<span class="req">*</span>
+                    </label>
+                    {{ log_form.log_username }}
+                </div>
+
+                <div class="field-wrap">
+                    <label>
+                        Password<span class="req">*</span>
+                    </label>
+                    {{ log_form.log_password }}
+                </div>
+
+                <div class="field-wrap">
+                    <label class="err_msg" id="log_err">{{ log_err }}</label>
+                </div>
+
+                <div class="field-wrap">
+                    <button class="button button-block" id="log_button">Continue</button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div id="signup">
+
+            <h1>Sign Up</h1>
+
+            <form action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+
+                <div class="field-wrap">
+                    <label>
+                        Login<span class="req">*</span>
+                    </label>
+                    {{ reg_form.reg_username }}
+                </div>
+
+                <div class="field-wrap">
+                    <label>
+                        Password<span class="req">*</span>
+                    </label>
+                    {{ reg_form.reg_password }}
+                </div>
+
+                <div class="field-wrap">
+                    <label>
+                        Confirm password<span class="req">*</span>
+                    </label>
+                    {{ reg_form.reg_confirm_password }}
+                </div>
+
+                <div class="field-wrap">
+                    <label class="err_msg" id="reg_err">{{ reg_err }}</label>
+                </div>
+
+                <div class="field-wrap">
+                    <button type="submit" class="button button-block" id="reg_button">Get Started</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <script type="text/javascript" src="{% static 'authentication/js/index.js' %}"></script>
+    {% if signup %}
+        <script>
+            $('.tab a').trigger("click", [false]);
+        </script>
+    {% endif %}
+
+{% endblock %}
