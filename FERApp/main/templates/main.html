@@ -18,7 +18,8 @@
             <h1>Hello, {{ user.username }}!</h1>
 
             <ul class="tab-group">
-            <li class="profile_info"><form action="{% url 'change_pass' %}" method="post">
+            <li class="profile_info">
+            <form action="{% url 'change_pass' %}" method="post">
                 {% csrf_token %}
 
                 <h1>Change password</h1>
@@ -26,14 +27,14 @@
                     <label>
                         Old password<span class="req">*</span>
                     </label>
-                    {{ form.old_password }}
+                    {{ change_form.old_password }}
                 </div>
 
                 <div class="field-wrap">
                     <label>
                         New password<span class="req">*</span>
                     </label>
-                    {{ form.new_password }}
+                    {{ change_form.new_password }}
                 </div>
 
                 <div class="field-wrap">
@@ -48,7 +49,8 @@
                     <button type="submit" class="button button-block" id="change_button">Change password</button>
                 </div>
 
-            </form></li>
+            </form>
+            </li>
 
             <li class="profile_info"><form>
             <div class="field-wrap">
@@ -70,13 +72,33 @@
         <div id="recognize">
             <h1>Recognize face expression</h1>
 
-            <form>
+            <form method="post" enctype="multipart/form-data" action="{% url 'upload' %}" class="img_upload">
+                {% csrf_token %}
 
-            <div class="field-wrap">
-                <label>
-                    Hello, {{ user.username }}!
-                </label>
-            </div>
+                <div class="field-wrap">
+                    <label>
+                        Title<span class="req">*</span>
+                    </label>
+                    {{ img_form.title }}
+                </div>
+
+                <div class="field-wrap">
+                    {{ img_form.image }}
+                </div>
+
+                <div class="field-wrap">
+                    <label class="err_msg" id="upload_err">{{ upload_err }}</label>
+                </div>
+
+                <div class="field-wrap">
+                    {% if img_obj %}
+                        <img src="{{ img_obj.image.url }}" style="max-height:300px">
+                    {% endif %}
+                </div>
+
+                <div class="field-wrap">
+                    <button type="submit" class="button button-block" id="rec_button">Recognize</button>
+                </div>
 
             </form>
 
@@ -87,5 +109,10 @@
 </div>
 
     <script type="text/javascript" src="{% static 'main/js/index.js' %}"></script>
+    {% if swap %}
+        <script>
+            $('.tab a').trigger("click", [false]);
+        </script>
+    {% endif %}
 
 {% endblock %}

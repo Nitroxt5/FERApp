@@ -101,6 +101,7 @@ label.highlight {
 }
 
 label.err_msg {
+  font-size: 18px;
   color: #ffffff;
   left: 0;
 }

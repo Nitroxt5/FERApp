@@ -152,3 +152,4 @@ cython_debug/
 #.idea/
 /FERApp/FERApp/credentials.py
 /FERApp/static/
+/FERApp/media/

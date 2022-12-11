@@ -16,10 +16,6 @@ import sys
 
 from .credentials import db, user, password, host, port, key
 
-logging.basicConfig(level=logging.DEBUG, handlers=[
-    logging.FileHandler("log.log", mode='w'),
-    logging.StreamHandler(sys.stdout)
-])
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,7 +28,15 @@ SECRET_KEY = key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
+
+if DEBUG:
+    log_level = logging.DEBUG
+else:
+    log_level = logging.INFO
+
+logging.basicConfig(level=log_level, format='%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s',
+                    handlers=[logging.FileHandler('log.log', mode='w'), logging.StreamHandler(sys.stdout)])
 
 
 # Application definition
@@ -130,8 +134,13 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [BASE_DIR / 'favicon']
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 5
+FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE

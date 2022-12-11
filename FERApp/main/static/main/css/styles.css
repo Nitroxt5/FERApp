@@ -112,6 +112,7 @@ label.highlight {
 label.err_msg {
   color: #ffffff;
   left: 0;
+  font-size: 18px;
 }
 
 #info {
@@ -186,5 +187,12 @@ textarea {
 .button-block {
   display: block;
   width: 100%;
+}
+
+img {
+  display: block;
+  max-height: 20%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
