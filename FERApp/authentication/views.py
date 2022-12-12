@@ -24,7 +24,7 @@ def log_in(request):
         form = LogForm(request.POST)
         if not form.is_valid():
             error_msg = next(filter(lambda el: el != [''], form.errors.values()), '')[0]
-            logging.debug(f'Form is invalid: {error_msg}')
+            logging.info(f'Form is invalid: {error_msg}')
             return render(request, 'base_auth.html', context={'swap': False, 'log_err': _(error_msg), 'reg_err': '',
                                                               'log_form': LogForm(), 'reg_form': RegForm()})
         user = authenticate(username=request.POST['log_username'], password=request.POST['log_password'])

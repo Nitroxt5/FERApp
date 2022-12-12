@@ -9,10 +9,10 @@ class Profile(models.Model):
     uploads_count = models.PositiveIntegerField(default=0)
 
     @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
+    def create_user_profile(sender, instance, created, **kwargs):  # NOQA
         if created:
-            Profile.objects.create(user=instance)
+            Profile.objects.create(user=instance)  # NOQA
 
     @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
+    def save_user_profile(sender, instance, **kwargs):  # NOQA
         instance.profile.save()

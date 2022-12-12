@@ -72,6 +72,8 @@
         <div id="recognize">
             <h1>Recognize face expression</h1>
 
+            <ul class="tab-group">
+            <li class="photo_upload">
             <form method="post" enctype="multipart/form-data" action="{% url 'upload' %}" class="img_upload">
                 {% csrf_token %}
 
@@ -91,16 +93,27 @@
                 </div>
 
                 <div class="field-wrap">
-                    {% if img_obj %}
-                        <img src="{{ img_obj.image.url }}" style="max-height:300px">
-                    {% endif %}
-                </div>
-
-                <div class="field-wrap">
                     <button type="submit" class="button button-block" id="rec_button">Recognize</button>
                 </div>
 
             </form>
+            </li>
+            <li class="photo_upload">
+            <form method="get" action="{% url 'download' %}">
+
+                <div class="field-wrap">
+                    {% if img_obj %}
+                        <img src="{{ img_obj.image.url }}">
+                    {% endif %}
+                </div>
+
+                <div class="field-wrap">
+                    <button type="submit" class="button button-block" id="load_button">Download</button>
+                </div>
+
+            </form>
+            </li>
+            </ul>
 
         </div>
 

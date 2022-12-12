@@ -1,4 +1,3 @@
-import logging
 import os
 
 from .validators import validate_file_size, no_space_title_validator
