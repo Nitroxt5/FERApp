@@ -21,8 +21,8 @@ a {
 .form {
   background: rgba(19, 35, 47, 0.9);
   padding: 0;
-  max-width: 1000px;
-  height: 650px;
+  max-width: 1200px;
+  height: 620px;
   margin: 40px auto;
   border-radius: 10px;
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
@@ -95,8 +95,8 @@ label .req {
 }
 
 label.active {
-  -webkit-transform: translateY(50px);
-          transform: translateY(50px);
+  -webkit-transform: translateY(40px);
+          transform: translateY(40px);
   left: 2px;
   font-size: 14px;
 }
@@ -147,7 +147,12 @@ textarea {
   position: relative;
   padding-left: 40px;
   padding-right: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 30px;
+}
+.field-wrap2 {
+  position: relative;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .top-row:after {
@@ -190,7 +195,33 @@ textarea {
 
 img {
   display: block;
-  max-width: 400px;
+  max-width: 520px;
+  max-height: 350px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.img-div {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  outline: 2px dashed #5d5d5d;
+  align-items: center;
+  display: flex;
+  padding-bottom: 0;
+}
+
+#upload-field {
+  height: 283px;
+}
+
+#id_image {
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+.file-choose:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }

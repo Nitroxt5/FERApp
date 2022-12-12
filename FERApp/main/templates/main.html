@@ -74,7 +74,7 @@
 
             <ul class="tab-group">
             <li class="photo_upload">
-            <form method="post" enctype="multipart/form-data" action="{% url 'upload' %}" class="img_upload">
+            <form method="post" enctype="multipart/form-data" action="{% url 'upload' %}" id="img_upload">
                 {% csrf_token %}
 
                 <div class="field-wrap">
@@ -84,8 +84,13 @@
                     {{ img_form.title }}
                 </div>
 
-                <div class="field-wrap">
-                    {{ img_form.image }}
+                <div class="field-wrap2">
+                    <div class="img-div" id="upload-field">
+                        {{ img_form.image }}
+                        <label for="id_image" class="file-choose">
+                            <span class="req">Click to upload a file. </span>File not selected
+                        </label>
+                    </div>
                 </div>
 
                 <div class="field-wrap">
@@ -102,9 +107,13 @@
             <form method="get" action="{% url 'download' %}">
 
                 <div class="field-wrap">
-                    {% if img_obj %}
-                        <img src="{{ img_obj.image.url }}">
-                    {% endif %}
+                    <div class="img-div">
+                        {% if img_obj %}
+                            <img src="{{ img_obj.image.url }}">
+                        {% else %}
+                            <label><span class="req">Processed image will be shown here</span></label>
+                        {% endif %}
+                    </div>
                 </div>
 
                 <div class="field-wrap">

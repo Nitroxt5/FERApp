@@ -36,9 +36,9 @@ def evaluate_emotions(instance):
 def _update_image_with_emotions(path_to_img: str, faces: list, emotions: list) -> np.ndarray:
     img = cv2.imread(path_to_img)  # NOQA
     red_BGR = (0, 0, 255)
-    thickness = 2
+    black_BGR = (0, 0, 0)
     for face, emotion in zip(faces, emotions):
         x, y, width, height = face['box']
-        img = cv2.rectangle(img, (x, y), (x + width, y + height), red_BGR, thickness)  # NOQA
-        img = cv2.putText(img, emotion, (x + 1, y + height - 1), cv2.FONT_HERSHEY_SIMPLEX, 0.7, red_BGR, thickness)  # NOQA
+        img = cv2.rectangle(img, (x, y), (x + width, y + height), red_BGR, 2)  # NOQA
+        img = cv2.putText(img, emotion, (x + 1, y + height - 1), cv2.FONT_HERSHEY_SIMPLEX, 0.6, black_BGR, 1)  # NOQA
     return img
