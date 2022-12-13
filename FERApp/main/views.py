@@ -24,8 +24,7 @@ def image_upload_recognize(request):
                                                          'swap': True, 'upload_err': _(error_msg)})
         form.instance.user = request.user
         form.save()
-        evaluate_emotions(form.instance)
-        request.user.profile.uploads_count += 1
+        request.user.profile.uploads_count += evaluate_emotions(form.instance)
         request.user.profile.save()
         return render(request, 'main.html', context={'change_form': PassForm(), 'img_form': form,
                                                      'img_obj': form.instance, 'swap': True, 'upload_err': ''})

@@ -18,6 +18,7 @@ def evaluate_emotions(instance):
     img = _update_image_with_emotions(instance.image.path, faces, emotions)
 
     cv2.imwrite(instance.image.path, img)  # NOQA
+    return len(faces)
 
 
 def _detect_faces(pixels: np.ndarray):
