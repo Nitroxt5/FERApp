@@ -230,7 +230,7 @@ img {
   z-index: 1;
   width: 100%;
 }
-.file-choose:hover {
+#upload-field:hover .req {
   cursor: pointer;
   text-decoration: underline;
 }
