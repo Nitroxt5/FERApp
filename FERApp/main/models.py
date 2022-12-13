@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 
 
 def get_upload_to(instance, filename):
-    return os.path.join(str(instance.user.id), filename)
+    _, ext = os.path.splitext(filename)
+    return os.path.join(str(instance.user.id), instance.title + ext)
 
 
 class Image(models.Model):
