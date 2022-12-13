@@ -7,6 +7,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     uploads_count = models.PositiveIntegerField(default=0)
+    last_image = models.ImageField(default='')
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):  # NOQA

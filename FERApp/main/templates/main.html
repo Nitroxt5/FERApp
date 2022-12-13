@@ -53,11 +53,32 @@
             </li>
 
             <li class="profile_info"><form>
-            <div class="field-wrap">
-                <label id="info">
-                  You recognized {{ user.profile.uploads_count }} face expressions already!
-                </label>
-            </div></form></li>
+
+                <div class="field-wrap">
+                    <label class="info">
+                      You recognized {{ user.profile.uploads_count }} face expressions already!
+                    </label>
+                </div>
+
+                <div class="field-wrap">
+                    <label class="info">
+                        Last processed image:
+                    </label>
+                </div>
+
+                <div class="field-wrap"></div>
+
+                <div class="field-wrap">
+                    <div class="img-div" id="show-field">
+                        {% if last_img %}
+                            <input type="image" class="load_image" accept="image/*" disabled src="{{ last_img.url }}">
+                        {% else %}
+                            <label><span class="req">Last processed image will be shown here</span></label>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </form></li>
             </ul>
 
             <form action="{% url 'logout' %}" method="post">
@@ -108,8 +129,8 @@
 
                 <div class="field-wrap">
                     <div class="img-div">
-                        {% if img_obj %}
-                            <input type="image" name="load_image" id="load_image" accept="image/*" disabled src="{{ img_obj.image.url }}">
+                        {% if rec_img %}
+                            <input type="image" class="load_image" accept="image/*" disabled src="{{ rec_img.url }}">
                         {% else %}
                             <label><span class="req">Processed image will be shown here</span></label>
                         {% endif %}
@@ -117,8 +138,8 @@
                 </div>
 
                 <div class="field-wrap">
-                    {% if img_obj %}
-                        <a download href="{{ img_obj.image.url }}" id="load_ref">Download</a>
+                    {% if rec_img %}
+                        <a download href="{{ rec_img.url }}" id="load_ref">Download</a>
                     {% endif %}
                 </div>
 

@@ -114,7 +114,7 @@ label.err_msg {
   font-size: 18px;
 }
 
-#info {
+.info {
   color: #ffffff;
   left: 0;
 }
@@ -144,12 +144,16 @@ textarea {
 }
 
 .field-wrap {
+  display: flex;
+  justify-content: center;
   position: relative;
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 30px;
 }
 .field-wrap2 {
+  display: flex;
+  justify-content: center;
   position: relative;
   padding-left: 40px;
   padding-right: 40px;
@@ -215,6 +219,11 @@ img {
   height: 283px;
 }
 
+#show-field {
+  height: 227px;
+  width: 80%;
+}
+
 #id_image {
   opacity: 0;
   position: absolute;
@@ -226,7 +235,7 @@ img {
   text-decoration: underline;
 }
 
-#load_image {
+.load_image {
   border: 0;
   padding: 0;
 }

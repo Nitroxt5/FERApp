@@ -12,7 +12,7 @@ def evaluate_emotions(instance):
 
     faces = _detect_faces(pixels)
     if len(faces) == 0:
-        return
+        return 0
     cut_faces = _cut_faces(pixels, faces)
     emotions = _recognize_emotions(cut_faces)
     img = _update_image_with_emotions(instance.image.path, faces, emotions)
