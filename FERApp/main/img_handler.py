@@ -15,6 +15,8 @@ def evaluate_emotions(instance):
     faces = list(filter(lambda face: face['confidence'] > 0.95, faces))  # NOQA
     log_faces = "\n".join(map(str, faces))
     logging.info(f'Found faces:\n{log_faces}')
+    if len(faces) == 0:
+        return
     cut_faces = []
     for face in faces:
         x, y, width, height = face['box']
@@ -36,9 +38,9 @@ def evaluate_emotions(instance):
 def _update_image_with_emotions(path_to_img: str, faces: list, emotions: list) -> np.ndarray:
     img = cv2.imread(path_to_img)  # NOQA
     red_BGR = (0, 0, 255)
-    black_BGR = (0, 0, 0)
+    blue_BGR = (255, 0, 0)
     for face, emotion in zip(faces, emotions):
         x, y, width, height = face['box']
         img = cv2.rectangle(img, (x, y), (x + width, y + height), red_BGR, 2)  # NOQA
-        img = cv2.putText(img, emotion, (x + 1, y + height - 1), cv2.FONT_HERSHEY_SIMPLEX, 0.6, black_BGR, 1)  # NOQA
+        img = cv2.putText(img, emotion, (x + 1, y + height - 1), cv2.FONT_HERSHEY_SIMPLEX, 0.6, blue_BGR, 1)  # NOQA
     return img

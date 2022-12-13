@@ -12,5 +12,5 @@ def get_upload_to(instance, filename):
 
 class Image(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    title = models.CharField(max_length=100, validators=[no_space_title_validator])
+    title = models.CharField(max_length=15, validators=[no_space_title_validator])
     image = models.ImageField(upload_to=get_upload_to, validators=[validate_file_size])

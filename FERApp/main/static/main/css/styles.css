@@ -225,3 +225,8 @@ img {
   cursor: pointer;
   text-decoration: underline;
 }
+
+#load_image {
+  border: 0;
+  padding: 0;
+}

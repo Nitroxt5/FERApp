@@ -2,6 +2,7 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -51,20 +52,18 @@ def register(request):
             logging.info(f'Form is invalid: {error_msg}')
             return render(request, 'base_auth.html', context={'swap': True, 'log_err': '', 'reg_err': _(error_msg),
                                                               'log_form': LogForm(), 'reg_form': RegForm()})
-        try:
-            user = User.objects.create_user(request.POST['reg_username'], '', request.POST['reg_password'])
-        except IntegrityError:
+        if User.objects.filter(username=request.POST['reg_username']).exists():
             return render(request, 'base_auth.html', context={'swap': True, 'log_err': '', 'reg_err': _('Username already exists!'),
                                                               'log_form': LogForm(), 'reg_form': RegForm()})
+        user = User.objects.create_user(request.POST['reg_username'], '', request.POST['reg_password'])
         user.save()
         login(request, user)
         return redirect('main', permanent=True)
     return redirect('auth', permanent=True)
 
 
+@login_required
 def change_pass(request):
-    if not request.user.is_authenticated:
-        return redirect('auth', permanent=True)
     if request.method == 'POST':
         form = PassForm(request.POST)
         if not form.is_valid():

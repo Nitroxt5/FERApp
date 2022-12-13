@@ -88,7 +88,7 @@
                     <div class="img-div" id="upload-field">
                         {{ img_form.image }}
                         <label for="id_image" class="file-choose">
-                            <span class="req">Click to upload a file. </span>File not selected
+                            <span class="req">Click to upload a file. </span><span id="loaded-file">File not selected</span>
                         </label>
                     </div>
                 </div>
@@ -104,12 +104,13 @@
             </form>
             </li>
             <li class="photo_upload">
-            <form method="get" action="{% url 'download' %}">
+            <form method="post" action="{% url 'download' %}">
+                {% csrf_token %}
 
                 <div class="field-wrap">
                     <div class="img-div">
                         {% if img_obj %}
-                            <img src="{{ img_obj.image.url }}">
+                            <input type="image" name="load_image" id="load_image" accept="image/*" disabled src="{{ img_obj.image.url }}">
                         {% else %}
                             <label><span class="req">Processed image will be shown here</span></label>
                         {% endif %}

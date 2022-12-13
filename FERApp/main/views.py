@@ -1,5 +1,6 @@
 import logging
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
 from django.http import FileResponse
@@ -8,15 +9,13 @@ from .forms import PassForm, ImageForm
 from .img_handler import evaluate_emotions
 
 
+@login_required
 def index(request):
-    if not request.user.is_authenticated:
-        return redirect('auth', permanent=True)
     return render(request, 'main.html', context={'change_form': PassForm(), 'img_form': ImageForm(), 'upload_err': ''})
 
 
+@login_required
 def image_upload_recognize(request):
-    if not request.user.is_authenticated:
-        return redirect('auth', permanent=True)
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if not form.is_valid():
@@ -34,5 +33,7 @@ def image_upload_recognize(request):
     return redirect('main', permanent=True)
 
 
+@login_required
 def image_download(request):
+    print(request)
     return redirect('main', permanent=True)

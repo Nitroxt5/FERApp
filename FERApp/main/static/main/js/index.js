@@ -29,6 +29,7 @@ $('.tab a').on('click', function (e, clear_msg = true) {
   const token = $('input[name="csrfmiddlewaretoken"]').val();
 
   $('input').val('');
+  $('#id_image').trigger('change');
   $('label').removeClass('active highlight');
   $(this).parent().addClass('active');
   $(this).parent().siblings().removeClass('active');
@@ -48,5 +49,19 @@ $('.tab a').on('click', function (e, clear_msg = true) {
   $(target).fadeIn(600);
 
   $('input[name="csrfmiddlewaretoken"]').val(token);
+
+});
+
+$('#id_image').on('change', function (e) {
+
+  if ('files' in $(this)[0]) {
+    if ($(this)[0].files.length == 0) {
+      $('#loaded-file').html('File not selected');
+    } else {
+      $('#loaded-file').html($(this)[0].files[0].name);
+    }
+  } else {
+    $('#loaded-file').html($(this)[0].files[0].name);
+  }
 
 });
