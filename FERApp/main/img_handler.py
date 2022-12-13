@@ -7,32 +7,44 @@ import logging
 
 
 def evaluate_emotions(instance):
-    labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
     img = Image.open(instance.image.path).convert('RGB')
     pixels = np.array(img)  # NOQA
+
+    faces = _detect_faces(pixels)
+    if len(faces) == 0:
+        return
+    cut_faces = _cut_faces(pixels, faces)
+    emotions = _recognize_emotions(cut_faces)
+    img = _update_image_with_emotions(instance.image.path, faces, emotions)
+
+    cv2.imwrite(instance.image.path, img)  # NOQA
+
+
+def _detect_faces(pixels: np.ndarray):
     detector = MTCNN()
     faces = detector.detect_faces(pixels)
     faces = list(filter(lambda face: face['confidence'] > 0.95, faces))  # NOQA
     log_faces = "\n".join(map(str, faces))
     logging.info(f'Found faces:\n{log_faces}')
-    if len(faces) == 0:
-        return
+    return faces
+
+
+def _cut_faces(pixels: np.ndarray, faces: list):
     cut_faces = []
     for face in faces:
         x, y, width, height = face['box']
         f = pixels[y: y + height, x: x + width]
         f = np.array(Image.fromarray(f).convert('L').resize((48, 48)))  # NOQA
         cut_faces.append(f)
+    return np.array(cut_faces).reshape((len(cut_faces), 48, 48, 1))
 
-    cut_faces = np.array(cut_faces).reshape((len(cut_faces), 48, 48, 1))
 
+def _recognize_emotions(cut_faces: np.ndarray):
+    labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
     nn_model = models.load_model('nn_model')
     nn_model.compile()
     emotions = backend.argmax(nn_model.predict(cut_faces), axis=-1)
-    emotions = [labels[e] for e in emotions]
-
-    img = _update_image_with_emotions(instance.image.path, faces, emotions)
-    cv2.imwrite(instance.image.path, img)  # NOQA
+    return [labels[e] for e in emotions]
 
 
 def _update_image_with_emotions(path_to_img: str, faces: list, emotions: list) -> np.ndarray:

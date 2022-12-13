@@ -54,14 +54,19 @@ $('.tab a').on('click', function (e, clear_msg = true) {
 
 $('#id_image').on('change', function (e) {
 
-  if ('files' in $(this)[0]) {
-    if ($(this)[0].files.length == 0) {
-      $('#loaded-file').html('File not selected');
-    } else {
-      $('#loaded-file').html($(this)[0].files[0].name);
-    }
+  if (!('files' in $(this)[0])) {
+    $('#loaded-file').html('File not selected');
+    return;
+  }
+
+  if ($(this)[0].files.length == 0) {
+    $('#loaded-file').html('File not selected');
   } else {
-    $('#loaded-file').html($(this)[0].files[0].name);
+    let filename = $(this)[0].files[0].name;
+    if (filename.length > 15) {
+      filename = filename.slice(0, 15) + '...';
+    }
+    $('#loaded-file').html(filename);
   }
 
 });

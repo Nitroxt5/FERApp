@@ -104,8 +104,7 @@
             </form>
             </li>
             <li class="photo_upload">
-            <form method="post" action="{% url 'download' %}">
-                {% csrf_token %}
+            <form>
 
                 <div class="field-wrap">
                     <div class="img-div">
@@ -118,7 +117,9 @@
                 </div>
 
                 <div class="field-wrap">
-                    <button type="submit" class="button button-block" id="load_button">Download</button>
+                    {% if img_obj %}
+                        <a download href="{{ img_obj.image.url }}" id="load_ref">Download</a>
+                    {% endif %}
                 </div>
 
             </form>
