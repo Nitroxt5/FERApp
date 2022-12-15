@@ -5,6 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/FERApp/static" />
       <excludeFolder url="file://$MODULE_DIR$/FERApp/media" />
+      <excludeFolder url="file://$MODULE_DIR$/FERApp/staticfiles" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

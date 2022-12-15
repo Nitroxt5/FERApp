@@ -69,13 +69,15 @@
                 <div class="field-wrap"></div>
 
                 <div class="field-wrap">
-                    <div class="img-div" id="show-field">
-                        {% if last_img %}
-                            <input type="image" class="load_image" accept="image/*" disabled src="{{ last_img.url }}">
-                        {% else %}
-                            <label><span class="req">Last processed image will be shown here</span></label>
-                        {% endif %}
+                    {% if last_img %}
+                    <a href="#big_img_last" class="show-field img-div" id="img_popup">
+                        <img class="load_image" src="{{ last_img.url }}">
+                    </a>
+                    {% else %}
+                    <div class="show-field img-div">
+                        <label><span class="req">You did not process any images</span></label>
                     </div>
+                    {% endif %}
                 </div>
 
             </form></li>
@@ -87,6 +89,12 @@
                   <button type="submit" class="button button-block" id="out_button">Log out</button>
               </div>
             </form>
+
+            {% if last_img %}
+            <div id="big_img_last" class="popup">
+                <a href="#"><div class="bg_div"><img class="full-img" src="{{ last_img.url }}"></div></a>
+            </div>
+            {% endif %}
 
         </div>
 
@@ -128,13 +136,15 @@
             <form>
 
                 <div class="field-wrap">
+                    {% if rec_img %}
+                        <a href="#big_img_rec" class="img-div" id="img_popup2">
+                            <img class="load_image" src="{{ rec_img.url }}">
+                        </a>
+                    {% else %}
                     <div class="img-div">
-                        {% if rec_img %}
-                            <input type="image" class="load_image" accept="image/*" disabled src="{{ rec_img.url }}">
-                        {% else %}
-                            <label><span class="req">Processed image will be shown here</span></label>
-                        {% endif %}
+                        <label><span class="req">Processed image will be shown here</span></label>
                     </div>
+                    {% endif %}
                 </div>
 
                 <div class="field-wrap">
@@ -142,6 +152,12 @@
                         <a download href="{{ rec_img.url }}" id="load_ref">Download</a>
                     {% endif %}
                 </div>
+
+                {% if rec_img %}
+                <div id="big_img_rec" class="popup">
+                    <a href="#" style="padding:0"><div class="bg_div"><img class="full-img" src="{{ last_img.url }}"></div></a>
+                </div>
+                {% endif %}
 
             </form>
             </li>
