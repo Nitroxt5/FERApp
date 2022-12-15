@@ -4,6 +4,7 @@ from PIL import Image
 from keras import backend, models
 from mtcnn import MTCNN
 import logging
+# from azure.storage.blob import BlobClient, ContentSettings
 
 
 def evaluate_emotions(instance):
@@ -19,6 +20,26 @@ def evaluate_emotions(instance):
 
     cv2.imwrite(instance.image.path, img)  # NOQA
     return len(faces)
+
+
+# def evaluate_emotions(instance):
+#     client = BlobClient(account_url='ferappstrg.blob.core.windows.net',
+#                         container_name='media',
+#                         blob_name=instance.image.name,
+#                         credential='AKD7RAav10VBqe4SrsDlFIB/jchCO/7gYyoNmUw/+6uYDAS0K1prlRkKib3sVyTkAVDoTBjdpo6z+AStMVdNEw==')
+#     img = Image.open(client.download_blob()).convert('RGB')
+#     pixels = np.array(img)  # NOQA
+#
+#     faces = _detect_faces(pixels)
+#     if len(faces) == 0:
+#         return 0
+#     cut_faces = _cut_faces(pixels, faces)
+#     emotions = _recognize_emotions(cut_faces)
+#     img = _update_image_with_emotions(pixels, faces, emotions)
+#
+#     client.upload_blob(img.tobytes(), overwrite=True, content_settings=ContentSettings())
+#     # cv2.imwrite(instance.image.path, img)  # NOQA
+#     return len(faces)
 
 
 def _detect_faces(pixels: np.ndarray):
