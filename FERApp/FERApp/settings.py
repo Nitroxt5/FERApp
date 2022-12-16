@@ -14,7 +14,7 @@ from pathlib import Path
 import logging
 import sys
 import os
-# from .credentials import db, user, password, host, port, key
+from .credentials import db, user, password, host, port, key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,8 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-&v3xh71y8sxl#bqc@ysqz1pbp1kgsu*2g!tqk$ir8u(65l!q#%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG', 'False') != 'False'
-# DEBUG = True
+# DEBUG = os.getenv('DJANGO_DEBUG', 'False') != 'False'
+DEBUG = True
 
 ALLOWED_HOSTS = ['fer-app.azurewebsites.net', '127.0.0.1']
 
@@ -92,17 +92,17 @@ WSGI_APPLICATION = 'FERApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': os.environ['DB_HOST'],
-        'PORT': os.environ['DB_PORT'],
-        'OPTIONS': {'sslmode': 'require'}
-        # 'NAME': db,
-        # 'USER': user,
-        # 'PASSWORD': password,
-        # 'HOST': host,
-        # 'PORT': port,
+        # 'NAME': os.environ['DB_NAME'],
+        # 'USER': os.environ['DB_USER'],
+        # 'PASSWORD': os.environ['DB_PASSWORD'],
+        # 'HOST': os.environ['DB_HOST'],
+        # 'PORT': os.environ['DB_PORT'],
+        # 'OPTIONS': {'sslmode': 'require'}
+        'NAME': db,
+        'USER': user,
+        'PASSWORD': password,
+        'HOST': host,
+        'PORT': port,
     }
 }
 

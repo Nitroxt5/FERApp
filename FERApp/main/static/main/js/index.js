@@ -64,9 +64,45 @@ $('#id_image').on('change', function (e) {
   } else {
     let filename = $(this)[0].files[0].name;
     if (filename.length > 15) {
-      filename = filename.slice(0, 15) + '...';
+      filename = filename.slice(0, 15) + '...' + filename.slice(-8);
     }
     $('#loaded-file').html(filename);
   }
+
+});
+
+$('#id_image').on('dragenter dragover', function (e) {
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  $('#upload-field').addClass('highlight');
+  $('#upload-field .req').css('text-decoration', 'underline');
+
+});
+
+$('#id_image').on('dragleave', function (e) {
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  $('#upload-field').removeClass('highlight');
+  $('#upload-field .req').css('text-decoration', 'none');
+
+});
+
+$('#id_image').on('drop', function (e) {
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  $('#upload-field').removeClass('highlight');
+  $('#upload-field .req').css('text-decoration', 'none');
+
+  let dt = new DataTransfer();
+  dt.items.add(e.originalEvent.dataTransfer.files[0]);
+  $(this)[0].files = dt.files;
+
+  $(this).change();
 
 });

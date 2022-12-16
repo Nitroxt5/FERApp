@@ -207,6 +207,10 @@ textarea {
   padding-bottom: 0;
 }
 
+.img-div.highlight {
+  outline: 3px dashed #1ab188;
+}
+
 #upload-field {
   height: 283px;
 }
