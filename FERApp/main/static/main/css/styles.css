@@ -238,6 +238,10 @@ textarea {
   height: 100%;
 }
 
+#loaded-file {
+  margin: 2px;
+}
+
 #load_ref {
   border: 0;
   width: 100%;
